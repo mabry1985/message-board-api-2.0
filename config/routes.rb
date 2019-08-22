@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :items
+  root to: 'users#new'
   concern :api_base do
     resources :groups do
       resources :messages
@@ -11,4 +11,11 @@ Rails.application.routes.draw do
   end
 
   post 'authenticate', to: 'authentication#authenticate'
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+  get '/user/:id' => 'users#show'
+
+  get '/signin' => 'sessions#new'
+  post '/signin' => 'sessions#create'
+  get '/signout' => 'sessions#destroy'
 end
